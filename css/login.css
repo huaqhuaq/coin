@@ -1,0 +1,84 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+.login {
+	width: 100%;
+	height: 100%;
+	background-color: #233750;
+	position: relative;
+	overflow: hidden;
+}
+.login:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-image: url(../img/pic_login.png);
+	background-position: 0 0;
+	background-size: cover;
+	width: 1472px;
+	height: 501px;
+}
+.logo{
+	display: inline-block;
+	margin: 4rem 0 2rem;
+}
+
+.login-form {
+	padding: 30px;
+	background: #355578;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 5px rgba(0,0,0,0.15);
+}
+.login-form h2 {
+	text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;
+    margin: 0 0 30px;
+    color: #fff;
+}
+.login-form .input-group {
+	width: 100%;
+}
+.login-form .input-group-icon {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+}
+.login-form .input-group .form-control {
+	padding-left: 40px;
+	background-color: rgba(0,0,0,0.3);
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 10px;
+}
+.login-form .input-group .form-control:last-child {
+	border-radius: 10px;
+}
+.login-form .input-group .form-control:focus {
+	-webkit-box-shadow: inset 0px 0px 10px 0px #333;
+	box-shadow: inset 0px 0px 10px 0px #333;
+}
+.login-form .form-group p a {
+	font-size: 16px;
+	color: #a1c1e9;
+}
+.login-form .form-group p a:focus,
+.login-form .form-group p a:hover {
+	color: #337ab7;
+	text-decoration: none;
+}
+.login-form .btn-wrap {
+	margin-top: 90px;
+}
+
+
+
+
+
+
