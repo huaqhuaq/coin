@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>signup</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="login" id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a href="/" target="_blank" class="logo">
+                		<img :src="logo" alt="logo" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-form animated animated-fast fadeIn">
+                        <h2>注册</h2>
+                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm">
+                            <el-form-item prop="phone">
+                                <img src="img/pic_phone.png" alt="pic_phone" class="input-group-icon">
+                                <el-input type="text" v-model="ruleForm.phone" placeholder="请输入手机号码" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item class="verify" prop="verify">
+                                <img src="img/pic_verification.png" alt="pic_verification" class="input-group-icon">
+                                <el-input type="text" v-model="ruleForm.verify" placeholder="请输入验证码" auto-complete="off"></el-input>
+                                <span class="getVCode" :class="{disabled}" @click="getVCode('ruleForm')">
+                                  {{vcode}}
+                                  <span v-show="!show" class="count">{{count}} s</span>
+                                </span>
+                            </el-form-item>
+                            <el-form-item prop="pass">
+                                <img src="img/pic_password.png" alt="pic_password" class="input-group-icon">
+                                <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item prop="checkpass">
+                                <img src="img/pic_password.png" alt="pic_password" class="input-group-icon">
+                                <el-input type="password" v-model="ruleForm.checkpass" placeholder="请确认密码" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <img src="img/pic_invitation.png" alt="pic_invitation" class="input-group-icon">
+                                <el-input type="text" placeholder="邀请码/手机号（选填）" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <div class="form-group clearfix">
+                                <a href="login.html" class="pull-right">已经注册？登录</a>
+                            </div>
+                            <el-form-item class="btn-wrap">
+                                <el-button type="primary" class="btn btn-primary btn-lg btn-block" @click="submitForm('ruleForm')">注册</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script>
+    var phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/
+    var validatePhone = (rule, value, callback) => {
+        if ( ! phoneReg.test(value) ) {
+            callback(new Error('请输入正确格式的手机号码'));
+        } else {
+            callback();
+        }
+    };
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (this.ruleForm.checkpass !== '') {
+          this.$refs.ruleForm.validateField('checkpass');
+        }
+        callback();
+      }
+    };
+    var validateCheckPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+    const TIME_COUNT = 5;
+    var login = new Vue({
+        el: '#login',
+        data: {
+            logo: 'img/pic_logo_1.png',
+            vcode: '发送验证码',
+            show: true,
+            count: '',
+            timer: null,
+            disabled: '',
+            ruleForm: {
+                phone: '',
+                verify: '',
+                pass: '',
+                checkpass: ''
+            },
+            rules: {
+                phone: [
+                    { required: true, validator: validatePhone, trigger: 'blur' }
+                ],
+                verify: [
+                    { required: true, message: '请输入验证码', trigger: 'blur' }
+                ],
+                pass: [
+                    { validator: validatePass, trigger: 'blur' }
+                ],
+                checkpass: [
+                   { validator: validateCheckPass, trigger: 'blur' }
+                ]
+            }
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                      console.log('success submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            getVCode(ruleForm){
+                if(this.ruleForm.phone !== "" && phoneReg.test(this.ruleForm.phone)) {
+                    if (!this.timer) {
+                        this.count = TIME_COUNT;
+                        this.show = false;
+                        this.timer = setInterval(() => {
+                            if (this.count > 0 && this.count <= TIME_COUNT) {
+                                this.count--;
+                            } else {
+                                this.show = true;
+                                this.disabled = ''
+                                clearInterval(this.timer);
+                                this.timer = null;
+                                this.vcode = '重新发送验证码'
+                            }
+                        }, 1000)
+                        if(this.show == false) {
+                            this.disabled = 'disabled'
+                        }
+                    }
+                } else if(this.ruleForm.phone === "") {
+                    this.$message({
+                        message: '请输入手机号码',
+                        type: 'warning'
+                    });
+                }
+            }   
+        }
+    })
+    </script>
+</body>
+
+</html>
