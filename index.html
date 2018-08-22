@@ -11,69 +11,407 @@
 </head>
 
 <body>
-	<div id="wrapper" class="clearfix">
+	<div id="wrapper" class="clearfix" :class = "isCollapse ? 'wrapper-sm' : 'wrapper-lg'">
 		<div id="slideBar">
-			<!-- <el-radio-group v-model="isCollapse" class="slideBar-top">
-				<el-radio-button :label="false"><i class="el-icon-menu"></i></el-radio-button>
-				<el-radio-button :label="true"><img src="img/pic_logo_2.png"></el-radio-button>
-			</el-radio-group> -->
-			<div :class = "isCollapse ? 'slideBar-sm' : ''" @click="collapse">
-				<img src="img/pic_logo_2.png">
-			</div>
-			<!-- :default-active="$route.path" -->
-			<el-menu default-active="3-1" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-				<el-menu-item index="1">
-					<i class="icon iconHome"></i>
-					<span slot="title">主页</span>
-				</el-menu-item>
-				<el-menu-item index="2">
+			<div class="slideLogo" @click="collapse"></div>
+			<el-menu default-active="invite"
+					 @open="handleOpen"
+					 @close="handleClose"
+					 :collapse="isCollapse"
+					 router
+		    >
+				<el-menu-item index="/mining">
 					<i class="icon iconMining"></i>
-					<span slot="title">交易挖矿</span>
+					<span class="menu-title" slot="title">交易挖矿</span>
 				</el-menu-item>
 				<el-submenu index="3">
 					<template slot="title">
 						<i class="icon iconPersonal"></i>
-						<span slot="title">个人中心</span>
+						<span class="menu-title" slot="title">个人中心</span>
 					</template>
-					<el-menu-item-group>
-						<el-menu-item index="3-1">邀请好友</el-menu-item>
-					</el-menu-item-group>
+					<el-menu-item class="menu-title" index="/invite">
+						邀请好友
+					</el-menu-item>
 				</el-submenu>
-				<el-menu-item index="4">
+				<el-menu-item index="/finance">
 					<i class="icon iconFinance"></i>
-					<span slot="title">财务管理</span>
-				</el-menu-item>
-				<el-menu-item index="5">
-					<i class="icon iconContact"></i>
-					<span slot="title">联系我们</span>
+					<span class="menu-title" slot="title">财务管理</span>
 				</el-menu-item>
 			</el-menu>
 		</div>
 		<div id="content">
-			<div id="topBar">
-				<div>
-					<el-breadcrumb separator-class="el-icon-arrow-right">
-						<el-breadcrumb-item :to="{ path: '/' }">个人中心</el-breadcrumb-item>
-						<el-breadcrumb-item>邀请好友</el-breadcrumb-item>
-					</el-breadcrumb>
-				</div>
-				<div>
-					用户名 <img :src="avatar">
+			<div id="topBar" class="clearfix">
+				<el-breadcrumb class="pull-left" separator-class="el-icon-arrow-right">
+					<el-breadcrumb-item :to="{ path: '/' }">交易挖矿</el-breadcrumb-item>
+					<el-breadcrumb-item>选择平台</el-breadcrumb-item>
+				</el-breadcrumb>
+				<div class="pull-right user">
+					<el-dropdown @command="handleCommand">
+					  <span class="el-dropdown-link">
+					    用户名 <img class="avatar" :src="avatar">
+					  </span>
+					  <el-dropdown-menu slot="dropdown">
+					  	<el-dropdown-item command="avatar">修改头像</el-dropdown-item>
+					    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+					  </el-dropdown-menu>
+					</el-dropdown>
 				</div>
 			</div>
 			<div id="main">
-
+				<router-view></router-view>
 			</div>
 		</div>
 	</div>
+
+	<template id="mining">
+	    <div class="row">
+			<div class="col-sm-6 col-xs-12">
+				<div class="mining mainblock">
+					<form action="" method="post" class="form-horizontal">
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿方式：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-4">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_way" id="mining_way1">
+							        		<label for="mining_way1" class="radiobox">同时买卖1</label>
+							        	</div>
+						        	</div>
+						        	<div class="col-sm-4">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_way" id="mining_way2">
+							        		<label for="mining_way2" class="radiobox">同时买卖2</label>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">参数设置（买入价）：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_buy" id="mining_buy1">
+							        		<label for="mining_buy1" class="radiobox"></label>
+							        		<p class="pull-left">
+							        			低于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+							        			个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_buy" id="mining_buy2">
+							        		<label for="mining_buy2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		高于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+								        		个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">参数设置（卖出价）：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell1">
+							        		<label for="mining_sell1" class="radiobox"></label>
+							        		<p class="pull-left">
+							        			低于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+							        			个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell2">
+							        		<label for="mining_sell2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		高于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+								        		个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell3">
+							        		<label for="mining_sell3" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		买入价格同价卖出
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">单笔交易数量：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-6">
+						        		<div class="form-group">
+							        		<input type="text" class="form-control input-sm" value="999">
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿开启条件：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_open" id="mining_open1">
+							        		<label for="mining_open1" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		实时委托
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_open" id="mining_open2">
+							        		<label for="mining_open2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		买入价格 - 卖出价格 < 卖出价格 * <input type="text" class="form-control input-sm count" value="0.05">%<br>
+								        		（请设置低于矿工费，否则可能亏损）
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿关闭条件：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+							        	<div class="form-group">
+							        		<p>
+								        		<input type="text" class="form-control input-sm count" value="5">秒后未成交部分
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_close" id="mining_close1">
+							        		<label for="mining_close1" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		市场成交
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_close" id="mining_close2">
+							        		<label for="mining_close2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		低于买入价 + <input type="text" class="form-control input-sm count" value="0.04">%卖出
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-3 col-sm-offset-3">
+							      <el-button type="danger">停止</el-button>
+							    </div>
+							    <div class="col-sm-3 col-sm-offset-1">
+							      <el-button type="success">启动</el-button>
+							    </div>
+						    </div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<div class="response mainblock">
+					右边的大框
+				</div>
+			</div>
+		</div>
+	</template>
+	<template id="invite">
+	    <div class="invite mainblock">
+			<h1 class="invite-title">我的邀请码 <span class="text-primary">R8R8W1</span></h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>受邀人</th>
+						<th>受邀时间</th>
+						<th>返佣总数</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>01</td>
+						<td>张三</td>
+						<td>2018-08-17</td>
+						<td>100</td>
+						<td>
+							<el-button type="primary" size="mini">明细</el-button>
+						</td>
+					</tr>
+					<tr>
+						<td>02</td>
+						<td>李四</td>
+						<td>2018-08-17</td>
+						<td>200</td>
+						<td>
+							<el-button type="primary" size="mini">明细</el-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="block">
+			    <el-pagination
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page.sync="currentPage"
+			      :page-size="100"
+			      layout="prev, pager, next, jumper"
+			      :total="1000">
+			    </el-pagination>
+			</div>
+		</div>
+	</template>
+	<template id="finance">
+	    <div class="invite mainblock">
+			<h1 class="invite-title">我的账户 <span>【余额 <span class="text-primary">9999</span>】</span></h1>
+			<div class="copy-wrap clearfix">
+				<el-button type="primary" class="btn_fuzhi pull-left" data-clipboard-action="copy" data-clipboard-target="#address">复制</el-button>
+				<p id="address" class="address pull-left">ox1196sv1fw6d2v116qwv12ed2</p>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>类型</th>
+						<th>数量</th>
+						<th>状态</th>
+						<th>时间</th>
+						<th>备注</th>
+						<th>操作</th>
+						<th>
+							<el-select v-model="value" placeholder="充值记录" size="mini">
+							    <el-option
+							      v-for="item in options"
+							      :key="item.value"
+							      :label="item.label"
+							      :value="item.value">
+							    </el-option>
+							</el-select>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>01</td>
+						<td>XXXXX</td>
+						<td>999</td>
+						<td>XXXXX</td>
+						<td>2018-08-17</td>
+						<td>xxxxx</td>
+						<td>xxxxx</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>02</td>
+						<td>XXXXX</td>
+						<td>999</td>
+						<td>XXXXX</td>
+						<td>2018-08-17</td>
+						<td>xxxxx</td>
+						<td>xxxxx</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="block">
+			    <el-pagination
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page.sync="currentPage"
+			      :page-size="100"
+			      layout="prev, pager, next, jumper"
+			      :total="1000">
+			    </el-pagination>
+			</div>
+		</div>
+	</template>
+
     <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
     <script src="js/index.js"></script>
     <script src="js/axios.min.js"></script>
+    <script src="js/clipboard.js"></script>
     <script>
-    new Vue({
+    var routes = [{
+        path:"/mining",
+        component:{
+			template:"#mining"
+		}
+    },{
+        path:"/invite",
+        component:{
+			template:"#invite",
+			data: function() {
+				return {
+					currentPage: 5
+				}
+			},
+			methods: {
+				handleSizeChange(val) {
+					console.log(`每页 ${val} 条`);
+				},
+				handleCurrentChange(val) {
+				console.log(`当前页: ${val}`);
+				}
+			}
+		}
+    },{
+        path:"/finance",
+        component:{
+			template:"#finance",
+			data: function() {
+				return {
+					currentPage: 10,
+					options: [{
+					value: '选项1',
+					label: '黄金糕'
+					}, {
+					value: '选项2',
+					label: '双皮奶'
+					}, {
+					value: '选项3',
+					label: '蚵仔煎'
+					}, {
+					value: '选项4',
+					label: '龙须面'
+					}, {
+					value: '选项5',
+					label: '北京烤鸭'
+					}],
+					value: ''
+				}
+			},
+			methods: {
+				handleSizeChange(val) {
+					console.log(`每页 ${val} 条`);
+				},
+				handleCurrentChange(val) {
+				console.log(`当前页: ${val}`);
+				}
+			}
+		}
+    }]
+    var router = new VueRouter({
+	    routes
+	});
+    var wrapper = new Vue({
     	el: '#wrapper',
+    	router,
     	data: {
-            isCollapse: true,
+            isCollapse: false,
 			avatar: './img/pic_head.png'
         },
         methods: {
@@ -85,9 +423,33 @@
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
-            }
+            },
+            handleCommand(command) {
+		        if (command == 'avatar') {
+		        	window.location.href="./user.html"
+		        } else  if (command == 'logout') {
+		        	window.location.href="./login.html"
+		        }
+			}
         }
     })
+    var clipboard = new ClipboardJS('.btn_fuzhi')
+    clipboard.on('success', function(e) {
+        console.log(e)
+        wrapper.$message({
+          showClose: true,
+          message: '复制成功',
+          type: 'success'
+        })
+    })
+    clipboard.on('error', function(e) {
+        console.log(e)
+        wrapper.$message({
+          showClose: true,
+          message: '复制失败',
+          type: 'error'
+        })
+	})
     </script>
 </body>
 

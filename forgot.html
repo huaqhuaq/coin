@@ -65,36 +65,36 @@
     <script>
     var phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/
     var validatePhone = (rule, value, callback) => {
-        if ( ! phoneReg.test(value) ) {
+        if (!phoneReg.test(value)) {
             callback(new Error('请输入正确格式的手机号码'));
         } else {
             callback();
         }
     };
     var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else {
-        if (this.ruleForm.checkpass !== '') {
-          this.$refs.ruleForm.validateField('checkpass');
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (login.$data.ruleForm.checkpass !== '') {
+            login.$refs.ruleForm.validateField('checkpass');
+          }
+          callback();
         }
-        callback();
-      }
     };
     var validateCheckPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'));
-      } else {
-        callback();
-      }
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== login.$data.ruleForm.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
     };
     const TIME_COUNT = 5;
     var login = new Vue({
         el: '#login',
         data: {
-            logo: 'img/pic_logo_1.png',
+            logo: 'img/pic_logo_3.png',
             vcode: '发送验证码',
             show: true,
             count: '',
@@ -108,16 +108,19 @@
             },
             rules: {
                 phone: [
-                    { required: true, validator: validatePhone, trigger: 'blur' }
+                    { required: true, message: '请输入手机号码' , trigger: 'blur' },
+                    { validator: validatePhone }
                 ],
                 verify: [
                     { required: true, message: '请输入验证码', trigger: 'blur' }
                 ],
                 pass: [
-                    { validator: validatePass, trigger: 'blur' }
+                    { validator: validatePass, trigger: 'blur' },
+                    { min: 6, message: '密码长度至少在6个字符', trigger: 'blur' }
                 ],
                 checkpass: [
-                   { validator: validateCheckPass, trigger: 'blur' }
+                    { validator: validateCheckPass, trigger: 'blur' },
+                    { min: 6, message: '密码长度至少在6个字符', trigger: 'blur' }
                 ]
             }
         },
@@ -126,39 +129,72 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                       console.log('success submit!');
+                      axios.post('/mining/frontend/web/mining/forgetpass', {
+                            username: this.ruleForm.phone,
+                            phone_code: this.ruleForm.verify,
+                            password: this.ruleForm.pass,
+                            password_compare: this.ruleForm.checkpass,
+                            invitation_code: this.ruleForm.invitation_code
+                        }).then(function(response) {
+                            console.log(response)
+                            var code = response.data.code
+                            if(code == 200) {
+                                login.$message.success('修改成功!');
+                            } else if (code == 201) {
+                                login.$message.error('验证码错误!');
+                            } else {
+                                console.log('500错误')
+                            }
+                        }).catch(function(error) {
+                            console.log(error)
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
             },
-            getVCode(ruleForm){
-                if(this.ruleForm.phone !== "" && phoneReg.test(this.ruleForm.phone)) {
-                    if (!this.timer) {
-                        this.count = TIME_COUNT;
-                        this.show = false;
-                        this.timer = setInterval(() => {
-                            if (this.count > 0 && this.count <= TIME_COUNT) {
-                                this.count--;
-                            } else {
-                                this.show = true;
-                                this.disabled = ''
-                                clearInterval(this.timer);
-                                this.timer = null;
-                                this.vcode = '重新发送验证码'
+            getVCode(ruleForm) {
+                axios.post('/mining/frontend/web/mining/email', {
+                    phone: this.ruleForm.phone,
+                    type: 1
+                }).then(function(response) {
+                    console.log(response)
+                    var code = response.data.code
+                    if (code == 200) {
+                        var _this = login
+                        if (_this.ruleForm.phone !== "" && phoneReg.test(_this.ruleForm.phone)) {
+                            if (!_this.timer) {
+                                _this.count = TIME_COUNT;
+                                _this.show = false;
+                                _this.timer = setInterval(() => {
+                                    if (_this.count > 0 && _this.count <= TIME_COUNT) {
+                                        _this.count--;
+                                    } else {
+                                        _this.show = true;
+                                        _this.disabled = ''
+                                        clearInterval(_this.timer);
+                                        _this.timer = null;
+                                        _this.vcode = '重新发送验证码'
+                                    }
+                                }, 1000)
+                                if (_this.show == false) {
+                                    _this.disabled = 'disabled'
+                                }
                             }
-                        }, 1000)
-                        if(this.show == false) {
-                            this.disabled = 'disabled'
+                        } else if (_this.ruleForm.phone === "") {
+                            _this.$message({
+                                message: '请输入手机号码',
+                                type: 'warning'
+                            });
                         }
+                    }  else if (code ==  204) {
+                        login.$message.error('请输入正确格式的手机号码!');
                     }
-                } else if(this.ruleForm.phone === "") {
-                    this.$message({
-                        message: '请输入手机号码',
-                        type: 'warning'
-                    });
-                }
-            }   
+                }).catch(function(error) {
+                    console.log(error)
+                });
+            }
         }
     })
     </script>

@@ -17,8 +17,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <a href="/" target="_blank" class="logo">
-                		<img :src="logo" alt="logo" class="img-responsive">
+                    <a href="" target="_blank" class="logo">
+                        <img :src="logo" alt="logo" class="img-responsive">
                     </a>
                 </div>
             </div>
@@ -54,23 +54,25 @@
     <script>
     var validatePhone = (rule, value, callback) => {
         var re = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/
-        if ( ! re.test(value) ) {
+        if (!re.test(value)) {
             callback(new Error('请输入正确格式的手机号码'));
         } else {
             callback();
         }
     };
+
     var login = new Vue({
         el: '#login',
         data: {
-            logo: 'img/pic_logo_1.png',
+            logo: 'img/pic_logo_3.png',
             ruleForm: {
                 phone: '',
                 pass: ''
             },
             rules: {
                 phone: [
-                    { required: true, validator: validatePhone, trigger: 'blur' }
+                    { required: true, message: '请输入手机号码', trigger: 'blur' },
+                    { validator: validatePhone }
                 ],
                 pass: [
                     { required: true, message: '请输入密码', trigger: 'change' }
@@ -82,6 +84,29 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         console.log('success submit!');
+                        axios.post('/mining/frontend/web/mining/login', {
+                            username: this.ruleForm.phone,
+                            password: this.ruleForm.pass
+                        }).then(function(response) {
+                            console.log(response)
+                            var code = response.data.code
+                            if(code == 200) {
+                                // window.localStorage.Token = response.data.auth_key
+                                // window.location.href = './index.html'
+                                axios.post('/mining/frontend/web/inside/inviter', {
+                                    username: login.ruleForm.phone,
+                                    auth_key: response.data.auth_key
+                                }).then(function(res) {
+                                    console.log(res)
+                                })
+                            } else if(code == 201) {
+                                login.$message.error('账号不存在!');
+                            } else if(code == 202) {
+                                login.$message.error('账户密码不匹配!');
+                            }
+                        }).catch(function(error) {
+                            console.log(error)
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
