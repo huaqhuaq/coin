@@ -1,0 +1,120 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+.login {
+	width: 100%;
+	height: 100%;
+	background-color: #233750;
+	position: relative;
+	overflow: hidden;
+}
+.login:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-image: url(../img/pic_login.png);
+	background-position: left bottom;
+	background-size: cover;
+	width: 1472px;
+	height: 501px;
+}
+.logo{
+	display: inline-block;
+	margin: 4rem 0 2rem;
+}
+.logo img{
+	margin-left: -10px;
+}
+
+.login-form {
+	padding: 30px;
+	background: #355578;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 5px rgba(0,0,0,0.15);
+}
+.login-form h2 {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 20px;
+	margin: 0 0 30px;
+	color: #fff;
+}
+.login-form .el-form-item__content {
+	background-color: rgba(0,0,0,0.3);
+	border: none;
+	border-radius: 10px;
+}
+.login-form .el-input__inner{
+	background: none;
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+	height: 46px;
+	padding: 10px 16px 10px 40px;
+	font-size: 16px;
+	line-height: 1.3333333;
+}
+.login-form .el-input__inner:focus,
+.verify .getVCode:active {
+	-webkit-box-shadow: inset 0px 0px 10px 5px rgba(0,0,0,0.15);
+	box-shadow: inset 0px 0px 10px 5px rgba(0,0,0,0.15);
+}
+.login-form .input-group-icon {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+}
+.login-form .form-group a {
+	font-size: 16px;
+	color: #a1c1e9;
+}
+.login-form .form-group a:focus,
+.login-form .form-group a:hover {
+	color: #337ab7;
+	text-decoration: none;
+}
+.login-form .btn-wrap {
+	margin-top: 90px;
+	margin-bottom: 0;
+}
+
+/* verify */
+.verify .el-input {
+	width: 60%;
+}
+.verify .getVCode {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	padding: 10px 0;
+	width: 40%;
+	font-size: 14px;
+	color: #fff;
+	line-height: 26px;
+	text-align: center;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.verify .getVCode.disabled {
+	color: #999;
+}
+.verify .getVCode::before {
+	content: "";
+	border-left: 1px solid #fff;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+
+
