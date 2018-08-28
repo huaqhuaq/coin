@@ -11,9 +11,12 @@ body,
 label {
 	font-weight: normal;
 }
+<<<<<<< HEAD
 a:hover {
 	text-decoration: none;
 }
+=======
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 .border-bottom {
 	border-bottom: 1px solid #ccc;
 }
@@ -84,9 +87,12 @@ a:hover {
 	background-position: 90% center;
 }
 
+<<<<<<< HEAD
 .wrapper-lg #slideBar .el-menu-item.menu-title {
 	padding-left: 50px!important;
 }
+=======
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 .wrapper-lg #slideBar .el-menu-item.is-active,
 .wrapper-lg #slideBar .el-menu-item:focus,
 .wrapper-lg #slideBar .el-menu-item:hover {
@@ -165,7 +171,11 @@ a:hover {
 #topBar {
 	width: 100%;
 	height: 80px;
+<<<<<<< HEAD
 	background: #87a5cc;
+=======
+	background: #c7ced8;
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 	flex: 0 0 80px;
 }
 #topBar .el-breadcrumb {
@@ -174,9 +184,14 @@ a:hover {
 #topBar .el-breadcrumb .el-breadcrumb__inner,
 #topBar .el-breadcrumb__separator {
 	font-size: 16px;
+<<<<<<< HEAD
 	color: #333;
 	line-height: 80px;
 	font-weight: bold;
+=======
+	color: #666;
+	line-height: 80px;
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 }
 #topBar .el-breadcrumb__inner a:hover,
 #topBar .el-breadcrumb__inner.is-link:hover {
@@ -199,16 +214,22 @@ a:hover {
 	height: 60px;
 	margin-right: 20px;
 }
+<<<<<<< HEAD
 #topBar .user .el-dropdown-link {
 	display: block;
 	font-size: 16px;
 	color: #fff;
 }
+=======
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 
 /*main*/
 #main {
 	width: 100%;
+<<<<<<< HEAD
 	min-width: 1064px;
+=======
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 	height: 100%;
 	flex: 1;
 	position: relative;
@@ -232,14 +253,20 @@ a:hover {
 /*index*/
 .coinex_1 {
 	display: block;
+<<<<<<< HEAD
 	width: 306px;
 	height: 156px;
+=======
+	width: 324px;
+	height: 174px;
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 	background-image: url(../img/btn_coinex_1.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
 }
 .coinex_1:focus,
+<<<<<<< HEAD
 .coinex_1:active {
 	background-image: url(../img/btn_coinex_2.png);
 }
@@ -253,6 +280,10 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
+=======
+.coinex_1:hover {
+	background-image: url(../img/btn_coinex_2.png);
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 }
 
 /*mining*/
@@ -262,9 +293,16 @@ a:hover {
 	border-radius: 10px;
 	background: #fff;
 }
+<<<<<<< HEAD
 .mainblock .el-form-item__error {
 	left: 15px;
 }
+=======
+/*.mining,
+.response {
+	min-width: 520px;
+}*/
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 .mining .control-label {
 	font-size: 16px;
 	color: #333;
@@ -308,7 +346,10 @@ a:hover {
 .invite-title {
 	font-size: 18px;
 	font-weight: normal;
+<<<<<<< HEAD
 	margin-top: 0;
+=======
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 }
 .invite-title span {
 	font-size: 32px;
@@ -360,6 +401,7 @@ input[type=file].el-upload__input {
 	display: block;
 }
 
+<<<<<<< HEAD
 .account,
 .logout {
 	background-repeat: no-repeat;
@@ -404,3 +446,9 @@ input[type=file].el-upload__input {
 .type_3 {
 	color: #E6A23C;
 }
+=======
+
+
+
+
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43

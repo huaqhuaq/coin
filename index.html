@@ -22,7 +22,11 @@
 						 :collapse="isCollapse"
 						 router
 			    >
+<<<<<<< HEAD
 					<el-menu-item index="/index">
+=======
+					<el-menu-item index="/mining">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 						<i class="icon iconMining"></i>
 						<span class="menu-title" slot="title">交易挖矿</span>
 					</el-menu-item>
@@ -44,6 +48,7 @@
 			<div id="content">
 				<div id="topBar" class="clearfix">
 					<el-breadcrumb class="pull-left" separator-class="el-icon-arrow-right">
+<<<<<<< HEAD
 						<el-breadcrumb-item
 						v-for='(item,index) in levelList'
 						:key='index'
@@ -64,6 +69,19 @@
 						  <el-dropdown-menu slot="dropdown">
 						  	<el-dropdown-item command="account"><div class="account">我的账户</div></el-dropdown-item>
 						    <el-dropdown-item command="logout"><div class="logout">退出登录</div></el-dropdown-item>
+=======
+						<el-breadcrumb-item :to="{ path: '/' }">交易挖矿</el-breadcrumb-item>
+						<el-breadcrumb-item>选择平台</el-breadcrumb-item>
+					</el-breadcrumb>
+					<div class="pull-right user">
+						<el-dropdown @command="handleCommand">
+						  <span class="el-dropdown-link">
+						    用户名 <img class="avatar" :src="avatar">
+						  </span>
+						  <el-dropdown-menu slot="dropdown">
+						  	<el-dropdown-item command="account">我的账户</el-dropdown-item>
+						    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 						  </el-dropdown-menu>
 						</el-dropdown>
 					</div>
@@ -74,6 +92,7 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<template id="index">
 		<div class="row">
 			<router-link to="/index/mining" class="col-sm-3 col-xs-12">
@@ -84,10 +103,14 @@
 			</div>
 		</div>
 	</template>
+=======
+
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 	<template id="mining">
 	    <div class="row">
 			<div class="col-sm-6 col-xs-12">
 				<div class="mining mainblock">
+<<<<<<< HEAD
 					<el-form
 						ref="miningForm"
 						:model="miningForm"
@@ -147,10 +170,164 @@
 							    <el-button type="danger" @click="stop" :disabled="!disabled">停止</el-button>
 							</div>
 						</el-form-item>
+=======
+					<el-form ref="miningForm" :model="miningForm" class="form-horizontal">
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿方式：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-4">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_way" id="mining_way1">
+							        		<label for="mining_way1" class="radiobox">同时买卖1</label>
+							        	</div>
+						        	</div>
+						        	<div class="col-sm-4">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_way" id="mining_way2">
+							        		<label for="mining_way2" class="radiobox">同时买卖2</label>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">参数设置（买入价）：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_buy" id="mining_buy1">
+							        		<label for="mining_buy1" class="radiobox"></label>
+							        		<p class="pull-left">
+							        			低于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+							        			个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_buy" id="mining_buy2">
+							        		<label for="mining_buy2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		高于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+								        		个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">参数设置（卖出价）：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell1">
+							        		<label for="mining_sell1" class="radiobox"></label>
+							        		<p class="pull-left">
+							        			低于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+							        			个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell2">
+							        		<label for="mining_sell2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		高于市场卖出价<input type="text" class="form-control input-sm count" value="999">
+								        		个深度平均值<input type="text" class="form-control input-sm count" value="999">
+							        		</p>
+							        	</div>
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_sell" id="mining_sell3">
+							        		<label for="mining_sell3" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		买入价格同价卖出
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">单笔交易数量：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-6">
+						        		<div class="form-group">
+							        		<input type="text" class="form-control input-sm" value="999">
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿开启条件：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+						        		<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_open" id="mining_open1">
+							        		<label for="mining_open1" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		实时委托
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_open" id="mining_open2">
+							        		<label for="mining_open2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		买入价格 - 卖出价格 < 卖出价格 * <input type="text" class="form-control input-sm count" value="0.05">%<br>
+								        		（请设置低于矿工费，否则可能亏损）
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">挖矿关闭条件：</label>
+						    <div class="col-sm-8 border-bottom">
+						        <div class="row">
+						        	<div class="col-sm-12">
+							        	<div class="form-group">
+							        		<p>
+								        		<input type="text" class="form-control input-sm count" value="5">秒后未成交部分
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_close" id="mining_close1">
+							        		<label for="mining_close1" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		市场成交
+							        		</p>
+							        	</div>
+							        	<div class="form-group">
+							        		<input type="radio" class="radioinput" name="mining_close" id="mining_close2">
+							        		<label for="mining_close2" class="radiobox"></label>
+							        		<p class="pull-left">
+								        		低于买入价 + <input type="text" class="form-control input-sm count" value="0.04">%卖出
+							        		</p>
+							        	</div>
+						        	</div>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-3 col-sm-offset-3">
+							      <el-button type="danger">停止</el-button>
+							    </div>
+							    <div class="col-sm-3 col-sm-offset-1">
+							      <el-button type="success">启动</el-button>
+							    </div>
+						    </div>
+						</div>
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 					</el-form >
 				</div>
 			</div>
 			<div class="col-sm-6 col-xs-12">
+<<<<<<< HEAD
 				<div class="outlog mainblock">
 					<h1 class="invite-title pull-left">【余额 <span class="text-primary">{{balance}}</span>】</h1>
 					<el-table
@@ -180,6 +357,10 @@
 				        label="本轮消耗代币">
 				      </el-table-column>
 				    </el-table>
+=======
+				<div class="response mainblock">
+					右边的大框
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 				</div>
 			</div>
 		</div>
@@ -188,8 +369,12 @@
 	    <div class="invite mainblock">
 			<h1 class="invite-title">我的邀请码 <span class="text-primary">{{invitation_code}}</span></h1>
 			<el-table
+<<<<<<< HEAD
 		      :data="inviter.slice((currentPage-1)*pageSize,currentPage*pageSize)"
 		      @current-change="handleCurrentChange">
+=======
+		      :data="inviter">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      <el-table-column
 			    type="index">
 			  </el-table-column>
@@ -206,13 +391,22 @@
 		        label="返佣总数">
 		      </el-table-column>
 		      <el-table-column>
+<<<<<<< HEAD
 			    <template slot-scope="scope">
 		       		  <el-button type="primary" size="mini" @click="detailClick"><span class="hide">{{scope.$index}}</span>明细</el-button>
 		         </template>
+=======
+		      	<template slot-scope="scope">
+		      		<router-link to="/detail">
+			        	<el-button type="primary" size="mini">明细</el-button>
+			        </router-link>
+			    </template>
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      </el-table-column>
 		    </el-table>
 			<div class="block">
 			    <el-pagination
+<<<<<<< HEAD
 			      background
 			      @size-change="handleSizeChange"
 			      @current-change="handleCurrentChange"
@@ -220,17 +414,30 @@
 			      :page-size="pageSize"
 			      layout="prev, pager, next"
 			      :total="totalCount">
+=======
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page.sync="currentPage"
+			      :page-size="100"
+			      layout="prev, pager, next, jumper"
+			      :total="1000">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 			    </el-pagination>
 			</div>
 		</div>
 	</template>
 	<template id="detail">
 		<div class="invite mainblock">
+<<<<<<< HEAD
 			<router-link to="/invite">
 				<el-button type="primary" size="small" icon="el-icon-arrow-left"></el-button>
 			</router-link>
 			<el-table
 		      :data="detail.slice((currentPage-1)*pageSize,currentPage*pageSize)">
+=======
+			<el-table
+		      :data="detail">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      <el-table-column
 			    type="index">
 			  </el-table-column>
@@ -253,6 +460,7 @@
 		    </el-table>
 			<div class="block">
 			    <el-pagination
+<<<<<<< HEAD
 			      background
 			      @size-change="handleSizeChange"
 			      @current-change="handleCurrentChange"
@@ -260,18 +468,37 @@
 			      :page-size="pageSize"
 			      layout="prev, pager, next"
 			      :total="totalCount">
+=======
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page.sync="currentPage"
+			      :page-size="100"
+			      layout="prev, pager, next, jumper"
+			      :total="1000">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 			    </el-pagination>
 			</div>
 		</div>
 	</template>
 	<template id="finance">
 	    <div class="invite mainblock">
+<<<<<<< HEAD
 			<div class="copy-wrap clearfix">
 				<h1 class="invite-title pull-left">我的账户 <span>【余额 <span class="text-primary">{{balance}}</span>】</span></h1>
 				<div class="pull-right">
 					<el-select v-model="value" filterable placeholder="请选择记录类型" @change="changeAccount">
 					    <el-option
 					      v-for="item in recordType"
+=======
+			<h1 class="invite-title">我的账户 <span>【余额 <span class="text-primary">{{balance}}</span>】</span></h1>
+			<div class="copy-wrap clearfix">
+				<el-button type="primary" class="btn_fuzhi pull-left" data-clipboard-action="copy" data-clipboard-target="#address">复制</el-button>
+				<p id="address" class="address pull-left">{{recharge_address}}</p>
+				<div class="pull-right">
+					<el-select v-model="value" filterable placeholder="请选择记录类型">
+					    <el-option
+					      v-for="item in type"
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 					      :key="item.value"
 					      :label="item.label"
 					      :value="item.value">
@@ -280,7 +507,14 @@
 				</div>
 			</div>
 			<el-table
+<<<<<<< HEAD
 		      :data="account.slice((currentPage-1)*pageSize,currentPage*pageSize)">
+=======
+		      :data="account">
+		      <el-table-column
+			    type="index">
+			  </el-table-column>
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      <el-table-column
 		        prop="order_id"
 		        label="订单号">
@@ -290,9 +524,22 @@
 		        label="账户">
 		      </el-table-column>
 		      <el-table-column
+<<<<<<< HEAD
 		        prop="type"
 		        label="类型">
 		         <template slot-scope="scope"><span :class="{type_1: scope.row.type == '充值记录',type_2: scope.row.type == '扣币记录',type_3: scope.row.type == '返佣记录'}">{{scope.row.type}}</span></template>
+=======
+		        prop="typlatform_namepe"
+		        label="平台">
+		      </el-table-column>
+		      <el-table-column
+		        prop="referrer_phone"
+		        label="上级">
+		      </el-table-column>
+		      <el-table-column
+		        prop="type"
+		        label="类型">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      </el-table-column>
 		      <el-table-column
 		        prop="money"
@@ -304,15 +551,28 @@
 		      </el-table-column>
 		      <el-table-column
 		        prop="time"
+<<<<<<< HEAD
 		        label="时间">
 		      </el-table-column>
 		      <el-table-column
 		        prop="referrer_phone"
 		        label="上级">
+=======
+		        label="充值/扣款时间">
+		      </el-table-column>
+		      <el-table-column
+		        prop="remark"
+		        label="备注">
+		      </el-table-column>
+		      <el-table-column
+		        prop="commission"
+		        label="返佣">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 		      </el-table-column>
 		    </el-table>
 			<div class="block">
 			    <el-pagination
+<<<<<<< HEAD
 			      background
 			      @size-change="handleSizeChange"
 			      @current-change="handleCurrentChange"
@@ -320,6 +580,14 @@
 			      :page-size="pageSize"
 			      layout="prev, pager, next"
 			      :total="totalCount">
+=======
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page.sync="currentPage"
+			      :page-size="100"
+			      layout="prev, pager, next, jumper"
+			      :total="1000">
+>>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 			    </el-pagination>
 			</div>
 		</div>
