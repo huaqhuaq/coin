@@ -6,7 +6,6 @@ var validatePhone = (rule, value, callback) => {
         callback();
     }
 };
-<<<<<<< HEAD
 var validateInteger = (rule, value, callback) => {
     if (!/^[1-9]\d*$/.test(value)) {
         callback(new Error('请输入正整数'));
@@ -14,8 +13,6 @@ var validateInteger = (rule, value, callback) => {
         callback();
     }
 };
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 var validatePass = (rule, value, callback) => {
     if (value === '') {
       callback(new Error('请输入密码'));
@@ -54,16 +51,7 @@ var validateCheckforgotPass = (rule, value, callback) => {
       callback();
     }
 };
-<<<<<<< HEAD
 
-=======
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-}
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 var clipboard = new ClipboardJS('.btn_fuzhi')
 clipboard.on('success', function(e) {
     console.log(e)
@@ -73,7 +61,6 @@ clipboard.on('error', function(e) {
     console.log(e)
     page.$message.error('复制失败')
 })
-<<<<<<< HEAD
 function timestampToTime(timestamp) {
     var date = new Date(timestamp * 1000);
     var Y = date.getFullYear() + '-';
@@ -97,19 +84,10 @@ var routes = [
     },{
     path:"/index/mining",
     name:"coinex平台",
-=======
-
-
-var invitation_code = GetQueryString('invitation_code')
-Vue.prototype.axios = axios
-var routes = [{
-    path:"/mining",
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
     component:{
         template:"#mining",
         data: function() {
             return {
-<<<<<<< HEAD
                 platform_name: 'coinex',
                 miningForm: {},
                 labelPosition: 'right',
@@ -260,35 +238,22 @@ var routes = [{
                 if (_this.value != '') {
                     _this.totalloss_fcoin = '共损失' + _this.value.split("/")[1]
                     _this.totalloss_ordercoin = '共损失' + _this.value.split("/")[0]
-=======
-                miningForm: {
-
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                 }
             }
         }
     }
 },{
     path:"/invite",
-<<<<<<< HEAD
     name:"邀请好友",
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
     component:{
         template:"#invite",
         data: function() {
             return {
-<<<<<<< HEAD
                 invitation_code: '',
                 inviter: [],
                 currentPage: 1,
                 pageSize: 5,
                 totalCount: 0
-=======
-                invitation_code: invitation_code,
-                inviter: [],
-                currentPage: 5
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         },
         created: function() {
@@ -297,7 +262,6 @@ var routes = [{
                 username: window.localStorage.getItem('username'),
                 auth_key: window.localStorage.getItem('Token')
             }).then(function(response) {
-<<<<<<< HEAD
                 if(response.data.code == -1) {
                     _this.$message.error('过期重新登录！')
                     window.location.href = './login.html'
@@ -307,13 +271,6 @@ var routes = [{
                        _this.inviter = response.data.data
                        _this.totalCount = response.data.data.length
                     }
-=======
-                console.log(response)
-                _this.invitation_code = response.data.invitation_code
-                console.log(response.data.data == '')
-                if(response.data.data != '') {
-                    _this.inviter = response.data.data
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                 }
             }).catch(function(error) {
                 console.log(error)
@@ -321,7 +278,6 @@ var routes = [{
         },
         methods: {
             handleSizeChange(val) {
-<<<<<<< HEAD
                 _this.pageSize = val;
             },
             handleCurrentChange(val) {
@@ -337,41 +293,25 @@ var routes = [{
                 var detailIndex = el.children[0].children[0].innerHTML
                 var username = _this.inviter[detailIndex].username
                 this.$router.push({path:"/detail", query: {username: username}})
-=======
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-              console.log(`当前页: ${val}`);
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         }
     }
 },{
     path:"/detail",
-<<<<<<< HEAD
     name:"邀请明细",
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
     component:{
         template:"#detail",
         data: function() {
             return {
-<<<<<<< HEAD
                 detail: [],
                 currentPage: 1,
                 pageSize: 5,
                 totalCount: 0,
                 username: ''
-=======
-                invitation_code: invitation_code,
-                detail: [],
-                currentPage: 5
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         },
         created: function() {
             var _this = this
-<<<<<<< HEAD
             var username = _this.$route.query.username
             axios.post('/mining/frontend/web/inside/detail',{
                 username: username,
@@ -385,45 +325,26 @@ var routes = [{
                     _this.detail = response.data.data
                     _this.totalCount = response.data.data.length
                 }
-=======
-            axios.post('/mining/frontend/web/inside/detail',{
-                username: window.localStorage.getItem('username'),
-                auth_key: window.localStorage.getItem('Token')
-            }).then(function(response) {
-                console.log(response)
-                _this.detail = response.data.data
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }).catch(function(error) {
                 console.log(error)
             })
         },
         methods: {
             handleSizeChange(val) {
-<<<<<<< HEAD
                 _this.pageSize = val;
             },
             handleCurrentChange(val) {
                 _this.currentPage = val;
-=======
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-              console.log(`当前页: ${val}`);
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         }
     }
 },{
     path:"/finance",
-<<<<<<< HEAD
     name:"财务管理",
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
     component:{
         template:"#finance",
         data: function() {
             return {
-<<<<<<< HEAD
                 recordType: [{
                   value: '0',
                   label: '全部记录'
@@ -444,23 +365,6 @@ var routes = [{
                 currentPage: 1,
                 pageSize: 5,
                 totalCount: 0
-=======
-                currentPage: 10,
-                type: [{
-                  value: '1',
-                  label: '充值记录 '
-                },{
-                  value: '2',
-                  label: '扣币记录 '
-                },{
-                  value: '3',
-                  label: '返佣记录 '
-                }],
-                value: '',
-                balance: '',
-                recharge_address: '',
-                account: []
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         },
         created: function() {
@@ -469,7 +373,6 @@ var routes = [{
                 username: window.localStorage.getItem('username'),
                 auth_key: window.localStorage.getItem('Token')
             }).then(function(response) {
-<<<<<<< HEAD
                 console.log('财务管理')
                 console.log(response)
                 if(response.data.code == -1) {
@@ -487,19 +390,12 @@ var routes = [{
                         _this.totalCount = response.data.data.length
                     }
                 }
-=======
-                console.log(response)
-                _this.balance = response.data.balance
-                _this.recharge_address = response.data.recharge_address
-                _this.account = response.data.data
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }).catch(function(error) {
                 console.log(error)
             })
         },
         methods: {
             handleSizeChange(val) {
-<<<<<<< HEAD
                 _this.pageSize = val;
             },
             handleCurrentChange(val) {
@@ -540,12 +436,6 @@ var routes = [{
                 }).catch(function(error) {
                     console.log(error)
                 })
-=======
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-              console.log(`当前页: ${val}`);
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             }
         }
     }
@@ -554,11 +444,7 @@ var router = new VueRouter({
     routes
 });
 
-<<<<<<< HEAD
 const TIME_COUNT = 60;
-=======
-const TIME_COUNT = 5;
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
 
 var page = new Vue({
     el: '#page',
@@ -631,7 +517,6 @@ var page = new Vue({
             ]
         },
         isCollapse: false,
-<<<<<<< HEAD
         avatar: './img/pic_head.png',
         username: '用户名',
         levelList: null
@@ -654,9 +539,6 @@ var page = new Vue({
        $route() {
          this.getBreadcrumb();
        }
-=======
-        avatar: './img/pic_head.png'
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
     },
     methods: {
         submitloginForm(formName) {
@@ -664,26 +546,16 @@ var page = new Vue({
                 if (valid) {
                     axios.post('/mining/frontend/web/mining/login', {
                         username: this.loginForm.phone,
-<<<<<<< HEAD
                         password: this.loginForm.pass,
                         auth_key: window.localStorage.Token
-=======
-                        password: this.loginForm.pass
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                     }).then(function(response) {
                         console.log(response)
                         var code = response.data.code
                         if(code == 200) {
-<<<<<<< HEAD
                             console.log(page.loginForm.phone)
                             window.localStorage.setItem('username',page.loginForm.phone)
                             window.localStorage.setItem('Token',response.data.auth_key)
                             window.location.href="./index.html#index"
-=======
-                            window.localStorage.setItem("username",page.loginForm.phone)
-                            window.localStorage.setItem("Token",response.data.auth_key)
-                            window.location.href="./index.html#mining"
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                         } else if(code == 201) {
                             page.$message.error('账号不存在!');
                         } else if(code == 202) {
@@ -711,14 +583,9 @@ var page = new Vue({
                         var code = response.data.code
                         if(code == 200) {
                             page.$message.success('注册成功!');
-<<<<<<< HEAD
                             window.localStorage.setItem("username",page.loginForm.phone)
                             window.localStorage.setItem("Token",response.auth_key)
                             window.location.href="./index.html#index"
-=======
-                            window.localStorage.setItem("Token",response.data.auth_key)
-                            window.location.href="./index.html#mining"
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                         } else if (code == 201) {
                             page.$message.error('验证码错误!');
                         } else if (code == 202) {
@@ -769,11 +636,8 @@ var page = new Vue({
                     page.$message.error('该手机号码已经注册!');
                 } else if (code ==  204) {
                     page.$message.error('请输入正确格式的手机号码!');
-<<<<<<< HEAD
                 } else if (code ==  206) {
                     page.$message.warning('发送验证码过于频繁1分钟后重试');
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                 }
             }).catch(function(error) {
                 console.log(error)
@@ -791,13 +655,10 @@ var page = new Vue({
                         var code = response.data.code
                         if(code == 200) {
                             page.$message.success('修改成功!');
-<<<<<<< HEAD
                             setTimeout(function(){
                                 window.localStorage.setItem("Token",response.auth_key)
                             }, 2000)
                             window.location.href="./index.html#index"
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                         } else if (code == 201) {
                             page.$message.error('验证码错误!');
                         } else {
@@ -843,15 +704,10 @@ var page = new Vue({
                     } else if (_this.forgotForm.phone === "") {
                         _this.$message.warning('请输入手机号码');
                     }
-<<<<<<< HEAD
                 } else if (code ==  204) {
                     page.$message.error('请输入正确格式的手机号码!');
                 } else if (code ==  206) {
                     page.$message.warning('发送验证码过于频繁1分钟后重试');
-=======
-                }  else if (code ==  204) {
-                    page.$message.error('请输入正确格式的手机号码!');
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
                 }
             }).catch(function(error) {
                 console.log(error)
@@ -869,10 +725,7 @@ var page = new Vue({
         handleCommand(command) {
             if(command == 'account') {
                 console.log('account')
-<<<<<<< HEAD
                 this.$router.push({path:"/finance"})
-=======
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
             } else if(command == 'logout') {
                 console.log('logout')
                 this.$confirm('确认退出登录？', '提示', {
@@ -880,7 +733,6 @@ var page = new Vue({
                   cancelButtonText: '取消',
                   type: 'warning'
                 }).then(() => {
-<<<<<<< HEAD
                    axios.post('/mining/frontend/web/inside/logout',{
                       auth_key: window.localStorage.Token
                    }).then(function() {
@@ -903,14 +755,3 @@ var page = new Vue({
         }
     }
 })
-=======
-                   window.localStorage.setItem('Token', '')
-                   window.location.href = './login.html'
-                }).catch(() => {
-                });
-            }
-        }
-    }
-})
-console.log(page.loginForm.phone)
->>>>>>> 3fb0979033f563ea22bfe6334acc8167105edb43
